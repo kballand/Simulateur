@@ -20,9 +20,14 @@ public class EvenementPassageCabinePalier extends Evenement {
         Cabine cabine = immeuble.cabine;
         assert !cabine.porteOuverte;
         assert étage.numéro() != cabine.étage.numéro();
-        if(cabine.passagersVeulentDescendre() || étage.aDesPassagers()) {
-            echeancier.ajouter(new EvenementOuverturePorteCabine(Global.tempsPourOuvrirOuFermerLesPortes));
+        assert cabine.intention() == '^' || cabine.intention() == 'v';
+        if((!cabine.étage.equals(immeuble.étageLePlusBas()) || cabine.intention() == '^') && (!cabine.étage.equals(immeuble.étageLePlusHaut()) || cabine.intention() == 'v')) {
+            cabine.étage = this.étage;
         }
-        notYetImplemented();
+        if(cabine.passagersVeulentDescendre() || étage.aDesPassagers()) {
+            echeancier.ajouter(new EvenementOuverturePorteCabine(this.date + Global.tempsPourOuvrirOuFermerLesPortes));
+        } else if((!this.étage.equals(immeuble.étageLePlusBas()) || cabine.intention() == '^') && (!this.étage.equals(immeuble.étageLePlusHaut()) || cabine.intention() == 'v')) {
+            echeancier.ajouter(new EvenementPassageCabinePalier(this.date + Global.tempsPourBougerLaCabineDUnEtage, immeuble.étage(this.étage.numéro() + (cabine.intention() == 'v' ? - 1 : 1))));
+        }
     }
 }

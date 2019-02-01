@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="543.5" y="89.0">Evenement</node>
+    <node x="0.0" y="242.0">PressRandomNumberGenerator</node>
+    <node x="851.5" y="0.0">Global</node>
+    <node x="1117.5" y="89.0">Etage</node>
+    <node x="730.0" y="168.0">EvenementPietonArrivePalier</node>
+    <node x="951.0" y="168.0">EvenementPassageCabinePalier</node>
+    <node x="484.0" y="168.0">EvenementFermeturePorteCabine</node>
+    <node x="425.0" y="242.0">Passager</node>
+    <node x="670.5" y="89.0">Immeuble</node>
+    <node x="792.5" y="89.0">Cabine</node>
+    <node x="261.0" y="242.0">LoiDePoisson</node>
+    <node x="0.0" y="168.0">EvenementArriveePassagerPalier</node>
+    <node x="897.5" y="89.0">Echeancier</node>
+    <node x="239.0" y="168.0">EvenementOuverturePorteCabine</node>
+    <node x="1022.5" y="89.0">Main</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Immeuble" target="Global">
+      <point x="0.0" y="-14.5" />
+      <point x="721.5" y="59.0" />
+      <point x="872.0" y="59.0" />
+      <point x="-20.5" y="14.5" />
+    </edge>
+    <edge source="Main" target="Global">
+      <point x="0.0" y="-14.5" />
+      <point x="1060.0" y="59.0" />
+      <point x="913.0" y="59.0" />
+      <point x="20.5" y="14.5" />
+    </edge>
+    <edge source="EvenementPassageCabinePalier" target="Evenement">
+      <point x="0.0" y="-14.5" />
+      <point x="1058.5" y="138.0" />
+      <point x="639.8" y="138.0" />
+      <point x="42.799999999999955" y="14.5" />
+    </edge>
+    <edge source="EvenementPietonArrivePalier" target="Evenement">
+      <point x="0.0" y="-14.5" />
+      <point x="830.5" y="148.0" />
+      <point x="618.4" y="148.0" />
+      <point x="21.399999999999977" y="14.5" />
+    </edge>
+    <edge source="Echeancier" target="Global">
+      <point x="0.0" y="-14.5" />
+      <point x="950.0" y="69.0" />
+      <point x="899.3333333333334" y="69.0" />
+      <point x="6.833333333333371" y="14.5" />
+    </edge>
+    <edge source="Evenement" target="Global">
+      <point x="0.0" y="-14.5" />
+      <point x="597.0" y="49.0" />
+      <point x="858.3333333333334" y="49.0" />
+      <point x="-34.16666666666663" y="14.5" />
+    </edge>
+    <edge source="EvenementFermeturePorteCabine" target="Evenement">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="Cabine" target="Global">
+      <point x="0.0" y="-14.5" />
+      <point x="835.0" y="69.0" />
+      <point x="885.6666666666666" y="69.0" />
+      <point x="-6.833333333333371" y="14.5" />
+    </edge>
+    <edge source="EvenementOuverturePorteCabine" target="Evenement">
+      <point x="0.0" y="-14.5" />
+      <point x="351.5" y="148.0" />
+      <point x="575.6" y="148.0" />
+      <point x="-21.399999999999977" y="14.5" />
+    </edge>
+    <edge source="Etage" target="Global">
+      <point x="0.0" y="-14.5" />
+      <point x="1156.0" y="49.0" />
+      <point x="926.6666666666666" y="49.0" />
+      <point x="34.16666666666663" y="14.5" />
+    </edge>
+    <edge source="EvenementArriveePassagerPalier" target="Evenement">
+      <point x="0.0" y="-14.5" />
+      <point x="109.5" y="138.0" />
+      <point x="554.2" y="138.0" />
+      <point x="-42.799999999999955" y="14.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="686.0" y="260.0" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

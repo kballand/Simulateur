@@ -8,11 +8,11 @@ import java.io.InputStreamReader;
   En mode parfait, tous les passagers respectent l'indicateur et ne montent que si l'indicateur
   de direction correspond à leur destination.
   En mode infernal, les passagers entrent dans la cabine dès qu'elle se présente. En mode infernal
-  on considère que les passager appuient toujours sur les deux boutons (bouton de demande pour 
+  on considère que les passagers appuient toujours sur les deux boutons (bouton de demande pour
   descendre ET bouton de demande pour monter).
 
   Les passagers sont des sportifs et ils peuvent décider de monter ou de descendre à pieds au bout
-  d'un certain délai de patience. Une fois qu'un passager à décidé de partir à pieds, il termine
+  d'un certain délai de patience. Une fois qu'un passager a décidé de partir à pieds, il termine
   complètement son voyage à pieds, même s'il passe sur un palier ou se trouve déjà la cabine.
 
   Liste des événements:

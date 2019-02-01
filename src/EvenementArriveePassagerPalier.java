@@ -21,7 +21,6 @@ public class EvenementArriveePassagerPalier extends Evenement {
         Passager p = new Passager(date, étage, immeuble);
 
         notYetImplemented();
-
     }
 
 }

@@ -118,4 +118,9 @@ public class Etage extends Global {
         return (!passagers.isEmpty());
     }
 
+    public Passager[] passagers() {
+        Passager[] passagers = new Passager[this.passagers.size()];
+        this.passagers.toArray(passagers);
+        return passagers;
+    }
 }

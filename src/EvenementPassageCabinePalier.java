@@ -23,6 +23,7 @@ public class EvenementPassageCabinePalier extends Evenement {
         assert !cabine.porteOuverte;
         assert étage.numéro() != cabine.étage.numéro();
         assert cabine.intention() == '^' || cabine.intention() == 'v';
+        assert Math.abs(cabine.étage.numéro() - this.étage.numéro()) == 1;
 
 
         if((!cabine.étage.equals(immeuble.étageLePlusBas()) || cabine.intention() == '^')
@@ -31,20 +32,12 @@ public class EvenementPassageCabinePalier extends Evenement {
 
 
         if(cabine.passagersVeulentDescendre() || étage.aDesPassagers())
-            echeancier.ajouter(
-                    new EvenementOuverturePorteCabine(
-                            date + Global.tempsPourOuvrirOuFermerLesPortes
-                    )
-            );
-        else{
-            if( (!this.étage.equals(immeuble.étageLePlusBas()) || cabine.intention() == '^')
-             && (!this.étage.equals(immeuble.étageLePlusHaut()) || cabine.intention() == 'v'))
-                echeancier.ajouter
-                    (new EvenementPassageCabinePalier(
+            echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
+        else if( (!this.étage.equals(immeuble.étageLePlusBas()) || cabine.intention() == '^')
+             && (!this.étage.equals(immeuble.étageLePlusHaut()) || cabine.intention() == 'v')) {
+                echeancier.ajouter(new EvenementPassageCabinePalier(
                             date + Global.tempsPourBougerLaCabineDUnEtage,
-                            immeuble.étage(étage.numéro() + (cabine.intention() == 'v' ? - 1 : 1))
-                    )
-                );
+                            immeuble.étage(étage.numéro() + (cabine.intention() == 'v' ? - 1 : 1))));
         }
     }
 }

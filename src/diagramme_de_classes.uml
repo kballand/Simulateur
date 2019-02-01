@@ -86,10 +86,8 @@
       <point x="143.33333333333348" y="114.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="1.0" x="905.5" y="952.5" />
-  <SelectedNodes>
-    <node>EvenementArriveePassagerPalier</node>
-  </SelectedNodes>
+  <settings layout="Hierarchic Group" zoom="1.0" x="692.5" y="845.0" />
+  <SelectedNodes />
   <Categories>
     <Category>Fields</Category>
     <Category>Constructors</Category>

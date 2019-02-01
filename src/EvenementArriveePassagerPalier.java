@@ -24,21 +24,21 @@ public class EvenementArriveePassagerPalier extends Evenement {
         assert p.étageDestination() != étage;
         assert (!immeuble.étageLePlusBas().equals(étage) || p.sens() == '^')
                 && (!immeuble.étageLePlusHaut().equals(étage) || p.sens() == 'v');
-        if(immeuble.cabine.étage.equals(this.étage)) {
+
+        if(immeuble.cabine.étage.equals(étage)) {
             if(immeuble.cabine.porteOuverte) {
-                if(immeuble.cabine.faireMonterPassager(p)) {
+                if(immeuble.cabine.faireMonterPassager(p))
                     echeancier.decalerFPC();
-                }
             } else {
                 Evenement e = echeancier.retourneEtEnlevePremier();
-                if(e instanceof EvenementOuverturePorteCabine) {
+                if(e instanceof EvenementOuverturePorteCabine)
                     echeancier.ajouter(e);
-                } else {
-                    echeancier.ajouter(new EvenementOuverturePorteCabine(this.date + Global.tempsPourOuvrirOuFermerLesPortes));
-                }
+                else
+                    echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
             }
         }
-        this.étage.ajouter(p);
+
+        étage.ajouter(p);
         étage.ajouter(p);
     }
 }

@@ -19,8 +19,9 @@ public class EvenementArriveePassagerPalier extends Evenement {
         assert étage != null;
         assert immeuble.étage(étage.numéro()) == étage;
         Passager p = new Passager(date, étage, immeuble);
-
-        notYetImplemented();
+        assert p.étageDestination() != étage;
+        assert (!immeuble.étageLePlusBas().equals(this.étage) || p.sens() == '^') && (!immeuble.étageLePlusHaut().equals(this.étage) || p.sens() == 'v');
+        this.étage.ajouter(p);
     }
 
 }

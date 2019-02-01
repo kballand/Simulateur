@@ -19,7 +19,7 @@ public class EvenementOuverturePorteCabine extends Evenement {
         cabine.faireDescendrePassagers(immeuble, this.date);
         for(Passager passager : cabine.étage.passagers()) {
             if(cabine.faireMonterPassager(passager)) {
-                
+
             } else {
                 break;
             }

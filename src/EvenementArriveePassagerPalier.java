@@ -18,9 +18,12 @@ public class EvenementArriveePassagerPalier extends Evenement {
     public void traiter(Immeuble immeuble, Echeancier echeancier) {
         assert étage != null;
         assert immeuble.étage(étage.numéro()) == étage;
+
         Passager p = new Passager(date, étage, immeuble);
+
         assert p.étageDestination() != étage;
-        assert (!immeuble.étageLePlusBas().equals(this.étage) || p.sens() == '^') && (!immeuble.étageLePlusHaut().equals(this.étage) || p.sens() == 'v');
+        assert (!immeuble.étageLePlusBas().equals(étage) || p.sens() == '^')
+                && (!immeuble.étageLePlusHaut().equals(étage) || p.sens() == 'v');
         if(immeuble.cabine.étage.equals(this.étage)) {
             if(immeuble.cabine.porteOuverte) {
                 if(immeuble.cabine.faireMonterPassager(p)) {
@@ -36,5 +39,6 @@ public class EvenementArriveePassagerPalier extends Evenement {
             }
         }
         this.étage.ajouter(p);
+        étage.ajouter(p);
     }
 }

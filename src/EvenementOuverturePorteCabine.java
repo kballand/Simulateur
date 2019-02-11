@@ -17,14 +17,17 @@ public class EvenementOuverturePorteCabine extends Evenement {
         assert !cabine.porteOuverte;
         cabine.porteOuverte = true;
         cabine.faireDescendrePassagers(immeuble, this.date);
-        for(Passager passager : cabine.étage.passagers()) {
-            if(cabine.faireMonterPassager(passager)) {
-
+        cabine.recalculIntention();
+        int nbEntrees = 0;
+        for(Passager passager : étage.passagers()) {
+            if(!cabine.faireMonterPassager(passager)) {
+                 break;
             } else {
-                break;
+                ++nbEntrees;
             }
         }
         assert cabine.porteOuverte;
+        echeancier.ajouter(new EvenementFermeturePorteCabine(this.date + nbEntrees * Global.tempsPourEntrerOuSortirDeLaCabine + Global.tempsPourOuvrirOuFermerLesPortes));
     }
 
 }

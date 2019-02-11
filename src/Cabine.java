@@ -111,9 +111,14 @@ public class Cabine extends Global {
     }
 
     public void recalculIntention() {
-        Passager premier = this.tableauPassager[0] == null ? this.étage.passagers()[0] : this.tableauPassager[0];
+        Passager premier = this.tableauPassager[0];
         if(premier != null) {
             this.changerIntention(premier.sens());
+        } else {
+            Passager[] passagers = this.étage.passagers();
+            if(passagers.length > 0) {
+                this.changerIntention(passagers[0].sens());
+            }
         }
     }
 }

@@ -137,4 +137,14 @@ public class Etage extends Global {
         }
         return i;
     }
+
+    public boolean faireMonterPassager(Passager p) {
+        assert this.passagers.contains(p);
+        assert this.immeuble.cabine.étage == this;
+        if(this.immeuble.cabine.faireMonterPassager(p)) {
+            this.passagers.remove(p);
+            return true;
+        }
+        return false;
+    }
 }

@@ -27,7 +27,7 @@ public class EvenementArriveePassagerPalier extends Evenement {
 
         if(immeuble.cabine.étage.equals(étage)) {
             if(immeuble.cabine.porteOuverte) {
-                if(immeuble.cabine.faireMonterPassager(p)) {
+                if(étage.faireMonterPassager(p)) {
                     echeancier.decalerFPC();
                 }
             } else {

@@ -123,4 +123,18 @@ public class Etage extends Global {
         this.passagers.toArray(passagers);
         return passagers;
     }
+
+    public int faireMonterPassagers() {
+        assert immeuble.cabine.étage == this;
+        int i;
+        for(i = 0; i < this.passagers.size(); i++) {
+            if(!immeuble.cabine.faireMonterPassager(this.passagers.get(i))) {
+                break;
+            }
+        }
+        for(int j = 0; j < i; j++) {
+            this.passagers.remove(j);
+        }
+        return i;
+    }
 }

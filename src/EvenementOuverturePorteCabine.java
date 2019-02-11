@@ -18,9 +18,9 @@ public class EvenementOuverturePorteCabine extends Evenement {
         cabine.porteOuverte = true;
         cabine.faireDescendrePassagers(immeuble, this.date);
         cabine.recalculIntention();
-        étage.faireMonterPassagers();
+        int nbEntrees = étage.faireMonterPassagers();
         assert cabine.porteOuverte;
-        echeancier.ajouter(new EvenementFermeturePorteCabine(this.date + étage.faireMonterPassagers() * Global.tempsPourEntrerOuSortirDeLaCabine + Global.tempsPourOuvrirOuFermerLesPortes));
+        echeancier.ajouter(new EvenementFermeturePorteCabine(this.date + nbEntrees * Global.tempsPourEntrerOuSortirDeLaCabine + Global.tempsPourOuvrirOuFermerLesPortes));
     }
 
 }

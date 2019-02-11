@@ -118,6 +118,8 @@ public class Cabine extends Global {
             Passager[] passagers = this.étage.passagers();
             if(passagers.length > 0) {
                 this.changerIntention(passagers[0].sens());
+            } else {
+                this.changerIntention(' ');
             }
         }
     }

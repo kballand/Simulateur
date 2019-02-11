@@ -20,7 +20,7 @@ public class EvenementFermeturePorteCabine extends Evenement {
         cabine.porteOuverte = false;
         if(cabine.intention() == '^') {
             echeancier.ajouter(new EvenementPassageCabinePalier(this.date + Global.tempsPourBougerLaCabineDUnEtage, immeuble.étage(cabine.étage.numéro() + 1)));
-        } else {
+        } else if(cabine.intention() == 'v') {
             echeancier.ajouter(new EvenementPassageCabinePalier(this.date + Global.tempsPourBougerLaCabineDUnEtage, immeuble.étage(cabine.étage.numéro() - 1)));
         }
         assert !cabine.porteOuverte;

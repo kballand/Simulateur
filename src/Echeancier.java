@@ -68,4 +68,9 @@ public class Echeancier extends Global {
             index++;
         }
     }
+
+
+    public void enleveEvenement(Evenement e){
+        listeEvenements.remove(e);
+    }
 }

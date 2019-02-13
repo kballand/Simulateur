@@ -110,7 +110,7 @@ public class Cabine extends Global {
         return false;
     }
 
-    public void recalculIntention() {
+    public void recalculIntention(Immeuble immeuble) {
         Passager premier = this.tableauPassager[0];
         if(premier != null) {
             this.changerIntention(premier.sens());
@@ -118,6 +118,10 @@ public class Cabine extends Global {
             Passager[] passagers = this.étage.passagers();
             if(passagers.length > 0) {
                 this.changerIntention(passagers[0].sens());
+            } else if(immeuble.passagerEnDessous(this.étage) ){
+                this.changerIntention('v');
+            } else if(immeuble.passagerAuDessus(this.étage)) {
+                this.changerIntention('^');
             } else {
                 this.changerIntention(' ');
             }

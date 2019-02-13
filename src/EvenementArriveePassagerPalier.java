@@ -25,12 +25,12 @@ public class EvenementArriveePassagerPalier extends Evenement {
         assert (!immeuble.étageLePlusBas().equals(étage) || p.sens() == '^')
                 && (!immeuble.étageLePlusHaut().equals(étage) || p.sens() == 'v');
 
+        boolean monte = false;
         if(immeuble.cabine.étage.equals(étage)) {
             if(immeuble.cabine.porteOuverte) {
                 if(étage.faireMonterPassager(p)) {
                     echeancier.decalerFPC();
-                } else {
-                    echeancier.ajouter(new EvenementPietonArrivePalier(this.date + Global.délaiDePatienceAvantSportif));
+                    monte = true;
                 }
             } else {
                 Evenement e = echeancier.retourneEtEnlevePremier();
@@ -39,12 +39,14 @@ public class EvenementArriveePassagerPalier extends Evenement {
                 } else {
                     echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
                 }
-                echeancier.ajouter(new EvenementPietonArrivePalier(this.date + Global.délaiDePatienceAvantSportif));
             }
-        } else {
+        }
+        if(!monte) {
+            étage.ajouter(p);
             echeancier.ajouter(new EvenementPietonArrivePalier(this.date + Global.délaiDePatienceAvantSportif));
         }
-        étage.ajouter(p);
+        immeuble.cabine.recalculIntention(immeuble
+        );
         echeancier.ajouter(new EvenementArriveePassagerPalier(date + étage.arrivéeSuivante(), étage));
     }
 }

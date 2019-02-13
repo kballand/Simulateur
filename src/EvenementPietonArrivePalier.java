@@ -14,7 +14,7 @@ public class EvenementPietonArrivePalier extends Evenement {
     }
 
     public void traiter(Immeuble immeuble, Echeancier echeancier) {
-        notYetImplemented();
+
     }
 
 }

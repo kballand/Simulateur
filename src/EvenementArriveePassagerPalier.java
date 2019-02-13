@@ -32,10 +32,11 @@ public class EvenementArriveePassagerPalier extends Evenement {
                 }
             } else {
                 Evenement e = echeancier.retourneEtEnlevePremier();
-                if(e instanceof EvenementOuverturePorteCabine)
+                if(e instanceof EvenementOuverturePorteCabine) {
                     echeancier.ajouter(e);
-                else
+                } else {
                     echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
+                }
             }
         }
         étage.ajouter(p);

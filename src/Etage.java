@@ -124,12 +124,15 @@ public class Etage extends Global {
         return passagers;
     }
 
-    public int faireMonterPassagers() {
+    public int faireMonterPassagers(Echeancier echeancier) {
         assert immeuble.cabine.étage == this;
         int i;
         for(i = 0; i < this.passagers.size(); i++) {
-            if(!immeuble.cabine.faireMonterPassager(this.passagers.get(i))) {
+            Passager p = this.passagers.get(i);
+            if(!immeuble.cabine.faireMonterPassager(p)) {
                 break;
+            } else {
+                echeancier.enleveEvenementPietonArrivePalier(p);
             }
         }
         for(int j = 0; j < i; j++) {

@@ -33,7 +33,7 @@ public class Cabine extends Global {
             }
             buffer.append(' ');
         }
-        assert (intention == 'v') || (intention == '^');
+        assert (intention == 'v') || (intention == '^') || (intention == ' ');
         buffer.append("\nIntention de la cabine: " + intention);
     }
 
@@ -52,12 +52,12 @@ public class Cabine extends Global {
     }
 
     public char intention() {
-        assert (intention == 'v') || (intention == '^');
+        assert (intention == 'v') || (intention == '^') || (intention == ' ');
         return intention;
     }
 
     public void changerIntention(char s) {
-        assert (s == 'v') || (s == '^');
+        assert (s == 'v') || (s == '^') || (s == ' ');
         intention = s;
     }
 

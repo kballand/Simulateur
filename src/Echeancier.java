@@ -68,5 +68,4 @@ public class Echeancier extends Global {
             index++;
         }
     }
-
 }

@@ -29,6 +29,8 @@ public class EvenementArriveePassagerPalier extends Evenement {
             if(immeuble.cabine.porteOuverte) {
                 if(étage.faireMonterPassager(p)) {
                     echeancier.decalerFPC();
+                } else {
+                    echeancier.ajouter(new EvenementPietonArrivePalier(this.date + Global.délaiDePatienceAvantSportif));
                 }
             } else {
                 Evenement e = echeancier.retourneEtEnlevePremier();
@@ -37,7 +39,10 @@ public class EvenementArriveePassagerPalier extends Evenement {
                 } else {
                     echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
                 }
+                echeancier.ajouter(new EvenementPietonArrivePalier(this.date + Global.délaiDePatienceAvantSportif));
             }
+        } else {
+            echeancier.ajouter(new EvenementPietonArrivePalier(this.date + Global.délaiDePatienceAvantSportif));
         }
         étage.ajouter(p);
         echeancier.ajouter(new EvenementArriveePassagerPalier(date + étage.arrivéeSuivante(), étage));

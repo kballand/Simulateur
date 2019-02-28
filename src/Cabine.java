@@ -33,7 +33,7 @@ public class Cabine extends Global {
             }
             buffer.append(' ');
         }
-        assert (intention == 'v') || (intention == '^') || (intention == ' ');
+        assert (intention == 'v') || (intention == '^');
         buffer.append("\nIntention de la cabine: " + intention);
     }
 
@@ -52,12 +52,12 @@ public class Cabine extends Global {
     }
 
     public char intention() {
-        assert (intention == 'v') || (intention == '^') || (intention == ' ');
+        assert (intention == 'v') || (intention == '^');
         return intention;
     }
 
     public void changerIntention(char s) {
-        assert (s == 'v') || (s == '^') || (s == ' ');
+        assert (s == 'v') || (s == '^');
         intention = s;
     }
 
@@ -111,19 +111,22 @@ public class Cabine extends Global {
     }
 
     public void recalculIntention(Immeuble immeuble) {
-        Passager premier = this.tableauPassager[0];
-        if(premier != null) {
-            this.changerIntention(premier.sens());
+        int i = 0;
+        while(i < this.tableauPassager.length && this.tableauPassager[i] == null) {
+            ++i;
+        }
+        if(i < this.tableauPassager.length) {
+            this.intention = this.tableauPassager[i].sens();
         } else {
             Passager[] passagers = this.étage.passagers();
             if(passagers.length > 0) {
                 this.changerIntention(passagers[0].sens());
-            } else if(immeuble.passagerEnDessous(this.étage) ){
-                this.changerIntention('v');
-            } else if(immeuble.passagerAuDessus(this.étage)) {
-                this.changerIntention('^');
             } else {
-                this.changerIntention(' ');
+                if ((this.intention == 'v' && !immeuble.passagerEnDessous(this.étage) && immeuble.passagerAuDessus(this.étage))) {
+                    this.intention = '^';
+                } else if ((this.intention == '^' && !immeuble.passagerAuDessus(this.étage) && immeuble.passagerEnDessous(this.étage))) {
+                    this.intention = 'v';
+                }
             }
         }
     }

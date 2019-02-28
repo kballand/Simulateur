@@ -22,5 +22,4 @@ public class EvenementOuverturePorteCabine extends Evenement {
         assert cabine.porteOuverte;
         echeancier.ajouter(new EvenementFermeturePorteCabine(this.date + (nbEntrees + nbSorties) * Global.tempsPourEntrerOuSortirDeLaCabine + Global.tempsPourOuvrirOuFermerLesPortes));
     }
-
 }

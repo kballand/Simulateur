@@ -72,7 +72,7 @@ public class Echeancier extends Global {
 
     public void enleveEvenementPietonArrivePalier(Passager p){
         for(Evenement e : listeEvenements){
-            if(e instanceof EvenementPietonArrivePalier && ((EvenementPietonArrivePalier)e).getPassager() == p){
+            if(e instanceof EvenementPietonArrivePalier && ((EvenementPietonArrivePalier)e).getPassager().equals(p)){
                 listeEvenements.remove(e);
                 break;
             }

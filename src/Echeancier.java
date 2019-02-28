@@ -70,7 +70,12 @@ public class Echeancier extends Global {
     }
 
 
-    public void enleveEvenement(Evenement e){
-        listeEvenements.remove(e);
+    public void enleveEvenementPietonArrivePalier(Passager p){
+        for(Evenement e : listeEvenements){
+            if(e instanceof EvenementPietonArrivePalier && ((EvenementPietonArrivePalier)e).getPassager() == p){
+                listeEvenements.remove(e);
+                break;
+            }
+        }
     }
 }

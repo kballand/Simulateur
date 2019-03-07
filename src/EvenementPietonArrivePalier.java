@@ -6,16 +6,26 @@ public class EvenementPietonArrivePalier extends Evenement {
     private Passager passager;
 
     public EvenementPietonArrivePalier(long d, Passager p) {
-        // Signature approximative et temporaire... juste pour que cela compile.
         super(d);
         this.passager = p;
     }
+
 
     public void afficheDetails(StringBuilder buffer, Immeuble immeuble) {
         buffer.append("PAP");
     }
 
-    public void traiter(Immeuble immeuble, Echeancier echeancier) {}
+    public void traiter(Immeuble immeuble, Echeancier echeancier) {
+        this.passager.changerEtagePieton(immeuble);
+        Etage étageCourantPieton = this.passager.étageCourantPieton();
+        if(this.passager.étageDestination().equals(étageCourantPieton)) {
+            étageCourantPieton.supprimerPieton(this.passager);
+            immeuble.ajouterCumul(this.date - this.passager.dateDépart());
+            ++immeuble.nombreTotalDesPassagersSortis;
+        } else {
+            echeancier.ajouter(new EvenementPietonArrivePalier(this.date + Global.tempsPourMonterOuDescendreUnEtageAPieds, this.passager));
+        }
+    }
 
     public Passager getPassager() {
         return passager;

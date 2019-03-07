@@ -10,6 +10,7 @@ public class Passager {
     private long dateDépart;
     private Etage étageDépart;
     private Etage étageDestination;
+    private Etage étageCourantPieton;
 
     public Passager(long dateDeDepart, Etage etageDeDepart, Immeuble immeuble) {
         Etage niveauDuSol = immeuble.niveauDuSol();
@@ -51,6 +52,25 @@ public class Passager {
 
     public char sens() {
         return (étageDestination.numéro() > étageDépart.numéro() ? '^' : 'v');
+    }
+
+    public Etage étageCourantPieton() {
+        return this.étageCourantPieton;
+    }
+
+    public void changerEtagePieton(Immeuble immeuble) {
+        if(this.étageCourantPieton == null) {
+            this.étageCourantPieton = this.étageDépart;
+            this.étageCourantPieton.ajouterPieton(this);
+        } else {
+            this.étageCourantPieton.supprimerPieton(this);
+            if(this.sens() == '^') {
+                this.étageCourantPieton = immeuble.étage(this.étageCourantPieton.numéro() + 1);
+            } else {
+                this.étageCourantPieton = immeuble.étage(this.étageCourantPieton.numéro() - 1);
+            }
+            this.étageCourantPieton.ajouterPieton(this);
+        }
     }
 
     public void afficheDans(StringBuilder buffer) {

@@ -124,6 +124,16 @@ public class Etage extends Global {
         return passagers;
     }
 
+    public void ajouterPieton(Passager passager) {
+        this.passagers.remove(passager);
+        this.pietons.add(passager);
+    }
+
+    public void supprimerPieton(Passager passager) {
+        assert this.pietons.contains(passager);
+        this.pietons.remove(passager);
+    }
+
     public int faireMonterPassagers(Echeancier echeancier) {
         assert immeuble.cabine.étage == this;
         int nbSorties = 0;

@@ -33,11 +33,14 @@ public class EvenementArriveePassagerPalier extends Evenement {
                     monte = true;
                 }
             } else {
-                Evenement e = echeancier.retourneEtEnlevePremier();
-                if(e instanceof EvenementOuverturePorteCabine) {
-                    echeancier.ajouter(e);
-                } else {
-                    echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
+                immeuble.cabine.recalculIntention(immeuble);
+                if(immeuble.cabine.intention() == p.sens()) {
+                    Evenement e = echeancier.retourneEtEnlevePremier();
+                    if(e instanceof EvenementOuverturePorteCabine) {
+                        echeancier.ajouter(e);
+                    } else {
+                        echeancier.ajouter(new EvenementOuverturePorteCabine(this.date + Global.tempsPourOuvrirOuFermerLesPortes));
+                    }
                 }
             }
         }

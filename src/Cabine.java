@@ -130,4 +130,16 @@ public class Cabine extends Global {
             }
         }
     }
+
+    public boolean estVide() {
+        int i = 0;
+        int length = this.tableauPassager.length;
+        while (i < length) {
+            if (tableauPassager[i] != null) {
+                return false;
+            }
+            i++;
+        }
+        return true;
+    }
 }

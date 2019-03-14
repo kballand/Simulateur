@@ -29,12 +29,16 @@ public class EvenementPassageCabinePalier extends Evenement {
         if ((!cabine.étage.equals(immeuble.étageLePlusBas()) || cabine.intention() == '^')
                 && (!cabine.étage.equals(immeuble.étageLePlusHaut()) || cabine.intention() == 'v'))
             cabine.étage = étage;
-
-
-        if (cabine.passagersVeulentDescendre() || étage.aDesPassagers()) {
+        cabine.recalculIntention(immeuble);
+        if (cabine.passagersVeulentDescendre() || (cabine.intention() == '^' && étage.aDesPassagersQuiMontent()) || (cabine.intention() == 'v' && étage.aDesPassagersQuiDescendent())) {
             echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
-        } else if ((!étage.equals(immeuble.étageLePlusBas()) || cabine.intention() == '^') && (!étage.equals(immeuble.étageLePlusHaut()) || cabine.intention() == 'v')) {
-            echeancier.ajouter(new EvenementPassageCabinePalier(date + Global.tempsPourBougerLaCabineDUnEtage, immeuble.étage(étage.numéro() + (cabine.intention() == 'v' ? -1 : 1))));
+        } else {
+            if(cabine.estVide() && étage.aDesPassagers()) {
+                cabine.changerIntention(étage.passagers()[0].sens());
+                echeancier.ajouter(new EvenementOuverturePorteCabine(date + Global.tempsPourOuvrirOuFermerLesPortes));
+            } else if((!étage.equals(immeuble.étageLePlusBas()) || cabine.intention() == '^') && (!étage.equals(immeuble.étageLePlusHaut()) || cabine.intention() == 'v')) {
+                echeancier.ajouter(new EvenementPassageCabinePalier(date + Global.tempsPourBougerLaCabineDUnEtage, immeuble.étage(étage.numéro() + (cabine.intention() == 'v' ? -1 : 1))));
+            }
         }
     }
 }

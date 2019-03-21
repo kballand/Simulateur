@@ -19,9 +19,6 @@ public class EvenementFermeturePorteCabine extends Evenement {
         assert cabine.porteOuverte;
         cabine.porteOuverte = false;
         if(cabine.peutBouger(immeuble)) {
-
-        }
-        if(cabine.intention() == '^') {
             echeancier.ajouter(new EvenementPassageCabinePalier(this.date + Global.tempsPourBougerLaCabineDUnEtage, immeuble.étage(cabine.étage.numéro() + (cabine.intention() == 'v' ? -1 : 1))));
         }
         assert !cabine.porteOuverte;

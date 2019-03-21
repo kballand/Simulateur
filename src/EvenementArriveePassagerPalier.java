@@ -35,10 +35,8 @@ public class EvenementArriveePassagerPalier extends Evenement {
             } else {
                 immeuble.cabine.recalculIntention(immeuble);
                 if(immeuble.cabine.intention() == p.sens()) {
-                    Evenement e = echeancier.retourneEtEnlevePremier();
-                    if(e instanceof EvenementOuverturePorteCabine) {
-                        echeancier.ajouter(e);
-                    } else {
+                    if(!echeancier.aEvenementOuverturePorteCabine()) {
+                        echeancier.enleverEvenementPassageCabinePalier();
                         echeancier.ajouter(new EvenementOuverturePorteCabine(this.date + Global.tempsPourOuvrirOuFermerLesPortes));
                     }
                 }

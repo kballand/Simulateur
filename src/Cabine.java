@@ -111,7 +111,7 @@ public class Cabine extends Global {
     }
 
     public void recalculIntention(Immeuble immeuble) {
-        if((this.intention == '^' && !immeuble.passagerAuDessus(this.étage)) || (this.intention == 'v' && !immeuble.passagerEnDessous(this.étage))) {
+        if((this.intention == '^' && !this.étage.aDesPassagersQuiMontent() && !immeuble.passagerAuDessus(this.étage)) || (this.intention == 'v' && ! this.étage.aDesPassagersQuiDescendent() && !immeuble.passagerEnDessous(this.étage))) {
             int i = 0;
             while(i < this.tableauPassager.length && this.tableauPassager[i] == null) {
                 ++i;

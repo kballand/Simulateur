@@ -141,7 +141,7 @@ public class Etage extends Global {
             Passager p = this.passagers.get(i - nbSorties);
             if(immeuble.cabine.faireMonterPassager(p)) {
                 ++nbSorties;
-                echeancier.enleveEvenementPietonArrivePalier(p);
+                echeancier.enleverEvenementPietonArrivePalier(p);
                 this.passagers.remove(p);
             }
         }

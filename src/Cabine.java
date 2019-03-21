@@ -133,6 +133,19 @@ public class Cabine extends Global {
         }
     }
 
+    public boolean doitOuvrirPortes(Immeuble immeuble) {
+        return this.passagersVeulentDescendre() ||
+                (this.intention == '^' && this.étage.aDesPassagersQuiMontent()) ||
+                (this.intention == 'v' && this.étage.aDesPassagersQuiDescendent()) ||
+                (this.étage.aDesPassagers() && (
+                    !Global.isModeParfait() ||
+                    (this.estVide() && (
+                            (this.intention == '^' && !immeuble.passagerAuDessus(this.étage)) ||
+                            (this.intention == 'v' && !immeuble.passagerEnDessous(this.étage))
+                    ))
+                ));
+    }
+
     public boolean estVide() {
         int i = 0;
         int length = this.tableauPassager.length;

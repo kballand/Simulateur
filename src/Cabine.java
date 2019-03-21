@@ -157,4 +157,8 @@ public class Cabine extends Global {
         }
         return true;
     }
+
+    public boolean peutBouger(Immeuble immeuble) {
+        return (!this.étage.equals(immeuble.étageLePlusBas()) || this.intention == '^') && (!this.étage.equals(immeuble.étageLePlusHaut()) || this.intention == 'v');
+    }
 }

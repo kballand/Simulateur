@@ -88,12 +88,12 @@ public class Echeancier extends Global {
         }
     }
 
-    public void enleverEvenementPassageCabinePalier(){
+    public boolean aEvenementPassageCabinePalier(){
         for(Evenement e : listeEvenements){
             if(e instanceof EvenementPassageCabinePalier) {
-                listeEvenements.remove(e);
-                break;
+                return true;
             }
         }
+        return false;
     }
 }

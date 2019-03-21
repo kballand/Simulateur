@@ -50,6 +50,5 @@ public class EvenementArriveePassagerPalier extends Evenement {
             étage.ajouter(p);
             echeancier.ajouter(new EvenementPietonArrivePalier(dateActuelle + Global.délaiDePatienceAvantSportif, p));
         }
-        immeuble.cabine.recalculIntention(immeuble);
     }
 }

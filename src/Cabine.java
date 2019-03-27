@@ -64,7 +64,7 @@ public class Cabine extends Global {
     public boolean faireMonterPassager(Passager p) {
         assert p != null;
         assert !transporte(p);
-        if (isModeParfait()) {
+        if (Global.isModeParfait()) {
             if (intention != p.sens()) {
                 return false;
             }

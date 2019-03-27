@@ -137,12 +137,14 @@ public class Etage extends Global {
     public int faireMonterPassagers(Echeancier echeancier) {
         assert immeuble.cabine.étage == this;
         int nbSorties = 0;
-        for(int i = 0; i < this.passagers.size(); i++) {
-            Passager p = this.passagers.get(i - nbSorties);
+        int taille = this.passagers.size();
+        for(int i = 0; i < taille; i++) {
+            int numero = i - nbSorties;
+            Passager p = this.passagers.get(numero);
             if(immeuble.cabine.faireMonterPassager(p)) {
                 ++nbSorties;
                 echeancier.enleverEvenementPietonArrivePalier(p);
-                this.passagers.remove(p);
+                this.passagers.remove(numero);
             }
         }
         return nbSorties;

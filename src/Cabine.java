@@ -116,16 +116,7 @@ public class Cabine extends Global {
                 }
             }
         }
-        if (this.étage == immeuble.étageLePlusHaut()) {
-            this.intention = 'v';
-            return;
-        }
-        if (this.étage == immeuble.étageLePlusBas()) {
-            this.intention = '^';
-            return;
-        }
         if ((this.intention == '^' && !this.étage.aDesPassagersQuiMontent() && !immeuble.passagerAuDessus(this.étage)) || (this.intention == 'v' && !this.étage.aDesPassagersQuiDescendent() && !immeuble.passagerEnDessous(this.étage))) {
-
             Passager[] passagers = this.étage.passagers();
             if (passagers.length > 0) {
                 if(pourOuverture) {
@@ -149,6 +140,13 @@ public class Cabine extends Global {
                     this.intention = '^';
                 }
             }
+        }
+        if (this.étage == immeuble.étageLePlusHaut()) {
+            this.intention = 'v';
+            return;
+        }
+        if (this.étage == immeuble.étageLePlusBas()) {
+            this.intention = '^';
         }
     }
 

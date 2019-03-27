@@ -105,7 +105,7 @@ public class Cabine extends Global {
         return false;
     }
 
-    public void recalculIntention(Immeuble immeuble) {
+    public void recalculIntention(Immeuble immeuble, boolean avecEtage) {
         if (this.étage == immeuble.étageLePlusHaut()) {
             this.intention = 'v';
             return;
@@ -125,10 +125,13 @@ public class Cabine extends Global {
             }
         }
         if ((this.intention == '^' && !this.étage.aDesPassagersQuiMontent() && !immeuble.passagerAuDessus(this.étage)) || (this.intention == 'v' && !this.étage.aDesPassagersQuiDescendent() && !immeuble.passagerEnDessous(this.étage))) {
-            Passager[] passagers = this.étage.passagers();
-            if (passagers.length > 0) {
-                this.intention = passagers[0].sens();
-                return;
+
+            if(avecEtage) {
+                Passager[] passagers = this.étage.passagers();
+                if (passagers.length > 0) {
+                    this.intention = passagers[0].sens();
+                    return;
+                }
             }
             if ((this.intention == 'v' && immeuble.passagerAuDessus(this.étage))) {
                 this.intention = '^';
@@ -146,16 +149,6 @@ public class Cabine extends Global {
                 }
             }
         }
-    }
-
-    private boolean aPassagerBonneDirection() {
-        for (Passager p : this.tableauPassager) {
-            if (p != null) {
-                if (p.sens() == this.intention)
-                    return true;
-            }
-        }
-        return false;
     }
 
     public boolean doitOuvrirPortes(Immeuble immeuble) {

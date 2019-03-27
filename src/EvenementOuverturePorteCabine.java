@@ -17,7 +17,7 @@ public class EvenementOuverturePorteCabine extends Evenement {
         assert !cabine.porteOuverte;
         cabine.porteOuverte = true;
         int nbSorties = cabine.faireDescendrePassagers(immeuble, this.date);
-        cabine.recalculIntention(immeuble);
+        cabine.recalculIntention(immeuble, true);
         int nbEntrees = étage.faireMonterPassagers(echeancier);
         assert cabine.porteOuverte;
         echeancier.ajouter(new EvenementFermeturePorteCabine(this.date + (nbEntrees + nbSorties) * Global.tempsPourEntrerOuSortirDeLaCabine + Global.tempsPourOuvrirOuFermerLesPortes));

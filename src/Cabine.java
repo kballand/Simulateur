@@ -114,9 +114,15 @@ public class Cabine extends Global {
             this.intention = '^';
             return;
         }
-        boolean aBonPassager = this.aPassagerBonneDirection();
-        if(aBonPassager) {
-            return;
+        boolean aAutrePassager = false;
+        for (Passager p : this.tableauPassager) {
+            if (p != null) {
+                if (p.sens() == this.intention) {
+                    return;
+                } else {
+                    aAutrePassager = true;
+                }
+            }
         }
         if ((this.intention == '^' && !this.étage.aDesPassagersQuiMontent() && !immeuble.passagerAuDessus(this.étage)) || (this.intention == 'v' && !this.étage.aDesPassagersQuiDescendent() && !immeuble.passagerEnDessous(this.étage))) {
             Passager[] passagers = this.étage.passagers();
@@ -132,10 +138,12 @@ public class Cabine extends Global {
                 this.intention = 'v';
                 return;
             }
-            if (this.intention == '^') {
-                this.intention = 'v';
-            } else {
-                this.intention = '^';
+            if(aAutrePassager) {
+                if (this.intention == '^') {
+                    this.intention = 'v';
+                } else {
+                    this.intention = '^';
+                }
             }
         }
     }

@@ -35,15 +35,6 @@ public class Echeancier extends Global {
         return e;
     }
 
-    public boolean aEvenementOuverturePorteCabine() {
-        for(Evenement e : listeEvenements){
-            if(e instanceof EvenementOuverturePorteCabine){
-                return true;
-            }
-        }
-        return false;
-    }
-
     public void affiche(StringBuilder buffer, Immeuble ascenseur) {
         buffer.setLength(0);
         buffer.append("Echéancier = ");
@@ -86,14 +77,5 @@ public class Echeancier extends Global {
                 break;
             }
         }
-    }
-
-    public boolean aEvenementPassageCabinePalier(){
-        for(Evenement e : listeEvenements){
-            if(e instanceof EvenementPassageCabinePalier) {
-                return true;
-            }
-        }
-        return false;
     }
 }

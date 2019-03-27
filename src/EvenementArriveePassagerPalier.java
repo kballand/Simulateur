@@ -32,15 +32,6 @@ public class EvenementArriveePassagerPalier extends Evenement {
                     echeancier.decalerFPC();
                     monte = true;
                 }
-            } else {
-                if(!echeancier.aEvenementPassageCabinePalier()) {
-                    immeuble.cabine.recalculIntention(immeuble);
-                    if(immeuble.cabine.intention() == p.sens()) {
-                        if(!echeancier.aEvenementOuverturePorteCabine()) {
-                            echeancier.ajouter(new EvenementOuverturePorteCabine(this.date + Global.tempsPourOuvrirOuFermerLesPortes));
-                        }
-                    }
-                }
             }
         }
         long dateActuelle = this.date;

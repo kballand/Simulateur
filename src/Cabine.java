@@ -56,11 +56,6 @@ public class Cabine extends Global {
         return intention;
     }
 
-    public void changerIntention(char s) {
-        assert (s == 'v') || (s == '^');
-        intention = s;
-    }
-
     public boolean faireMonterPassager(Passager p) {
         assert p != null;
         assert !transporte(p);
@@ -121,11 +116,11 @@ public class Cabine extends Global {
             } else {
                 Passager[] passagers = this.étage.passagers();
                 if(passagers.length > 0) {
-                    this.changerIntention(passagers[0].sens());
+                    this.intention = passagers[0].sens();
                 } else {
-                    if ((this.intention == 'v' && !immeuble.passagerEnDessous(this.étage) && immeuble.passagerAuDessus(this.étage))) {
+                    if ((this.intention == 'v' && immeuble.passagerAuDessus(this.étage))) {
                         this.intention = '^';
-                    } else if ((this.intention == '^' && !immeuble.passagerAuDessus(this.étage) && immeuble.passagerEnDessous(this.étage))) {
+                    } else if ((this.intention == '^' && immeuble.passagerEnDessous(this.étage))) {
                         this.intention = 'v';
                     }
                 }

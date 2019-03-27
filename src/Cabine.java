@@ -106,26 +106,48 @@ public class Cabine extends Global {
     }
 
     public void recalculIntention(Immeuble immeuble) {
-        if((this.intention == '^' && !this.étage.aDesPassagersQuiMontent() && !immeuble.passagerAuDessus(this.étage)) || (this.intention == 'v' && ! this.étage.aDesPassagersQuiDescendent() && !immeuble.passagerEnDessous(this.étage))) {
-            int i = 0;
-            while(i < this.tableauPassager.length && this.tableauPassager[i] == null) {
-                ++i;
+        if (this.étage == immeuble.étageLePlusHaut()) {
+            this.intention = 'v';
+            return;
+        }
+        if (this.étage == immeuble.étageLePlusBas()) {
+            this.intention = '^';
+            return;
+        }
+        boolean aBonPassager = this.aPassagerBonneDirection();
+        if(aBonPassager) {
+            return;
+        }
+        if ((this.intention == '^' && !this.étage.aDesPassagersQuiMontent() && !immeuble.passagerAuDessus(this.étage)) || (this.intention == 'v' && !this.étage.aDesPassagersQuiDescendent() && !immeuble.passagerEnDessous(this.étage))) {
+            Passager[] passagers = this.étage.passagers();
+            if (passagers.length > 0) {
+                this.intention = passagers[0].sens();
+                return;
             }
-            if(i < this.tableauPassager.length) {
-                this.intention = this.tableauPassager[i].sens();
+            if ((this.intention == 'v' && immeuble.passagerAuDessus(this.étage))) {
+                this.intention = '^';
+                return;
+            }
+            if ((this.intention == '^' && immeuble.passagerEnDessous(this.étage))) {
+                this.intention = 'v';
+                return;
+            }
+            if (this.intention == '^') {
+                this.intention = 'v';
             } else {
-                Passager[] passagers = this.étage.passagers();
-                if(passagers.length > 0) {
-                    this.intention = passagers[0].sens();
-                } else {
-                    if ((this.intention == 'v' && immeuble.passagerAuDessus(this.étage))) {
-                        this.intention = '^';
-                    } else if ((this.intention == '^' && immeuble.passagerEnDessous(this.étage))) {
-                        this.intention = 'v';
-                    }
-                }
+                this.intention = '^';
             }
         }
+    }
+
+    private boolean aPassagerBonneDirection() {
+        for (Passager p : this.tableauPassager) {
+            if (p != null) {
+                if (p.sens() == this.intention)
+                    return true;
+            }
+        }
+        return false;
     }
 
     public boolean doitOuvrirPortes(Immeuble immeuble) {
@@ -133,11 +155,11 @@ public class Cabine extends Global {
                 (this.intention == '^' && this.étage.aDesPassagersQuiMontent()) ||
                 (this.intention == 'v' && this.étage.aDesPassagersQuiDescendent()) ||
                 (this.étage.aDesPassagers() && (
-                    !Global.isModeParfait() ||
-                    (this.estVide() && (
-                            (this.intention == '^' && !immeuble.passagerAuDessus(this.étage)) ||
-                            (this.intention == 'v' && !immeuble.passagerEnDessous(this.étage))
-                    ))
+                        !Global.isModeParfait() ||
+                                (this.estVide() && (
+                                        (this.intention == '^' && !immeuble.passagerAuDessus(this.étage)) ||
+                                                (this.intention == 'v' && !immeuble.passagerEnDessous(this.étage))
+                                ))
                 ));
     }
 

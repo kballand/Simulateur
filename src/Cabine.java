@@ -105,7 +105,7 @@ public class Cabine extends Global {
         return false;
     }
 
-    public void recalculIntention(Immeuble immeuble, boolean avecEtage) {
+    public void recalculIntention(Immeuble immeuble, boolean pourOuverture) {
         boolean aAutrePassager = false;
         for (Passager p : this.tableauPassager) {
             if (p != null) {
@@ -126,13 +126,14 @@ public class Cabine extends Global {
         }
         if ((this.intention == '^' && !this.étage.aDesPassagersQuiMontent() && !immeuble.passagerAuDessus(this.étage)) || (this.intention == 'v' && !this.étage.aDesPassagersQuiDescendent() && !immeuble.passagerEnDessous(this.étage))) {
 
-            if(avecEtage) {
-                Passager[] passagers = this.étage.passagers();
-                if (passagers.length > 0) {
+            Passager[] passagers = this.étage.passagers();
+            if (passagers.length > 0) {
+                if(pourOuverture) {
                     this.intention = passagers[0].sens();
-                    return;
                 }
+                return;
             }
+
             if ((this.intention == 'v' && immeuble.passagerAuDessus(this.étage))) {
                 this.intention = '^';
                 return;

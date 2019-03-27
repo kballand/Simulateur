@@ -106,14 +106,6 @@ public class Cabine extends Global {
     }
 
     public void recalculIntention(Immeuble immeuble, boolean avecEtage) {
-        if (this.étage == immeuble.étageLePlusHaut()) {
-            this.intention = 'v';
-            return;
-        }
-        if (this.étage == immeuble.étageLePlusBas()) {
-            this.intention = '^';
-            return;
-        }
         boolean aAutrePassager = false;
         for (Passager p : this.tableauPassager) {
             if (p != null) {
@@ -123,6 +115,14 @@ public class Cabine extends Global {
                     aAutrePassager = true;
                 }
             }
+        }
+        if (this.étage == immeuble.étageLePlusHaut()) {
+            this.intention = 'v';
+            return;
+        }
+        if (this.étage == immeuble.étageLePlusBas()) {
+            this.intention = '^';
+            return;
         }
         if ((this.intention == '^' && !this.étage.aDesPassagersQuiMontent() && !immeuble.passagerAuDessus(this.étage)) || (this.intention == 'v' && !this.étage.aDesPassagersQuiDescendent() && !immeuble.passagerEnDessous(this.étage))) {
 

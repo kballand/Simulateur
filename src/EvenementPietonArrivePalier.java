@@ -18,7 +18,7 @@ public class EvenementPietonArrivePalier extends Evenement {
     public void traiter(Immeuble immeuble, Echeancier echeancier) {
         this.passager.changerEtagePieton(immeuble);
         Etage étageCourantPieton = this.passager.étageCourantPieton();
-        if(this.passager.étageDestination().equals(étageCourantPieton)) {
+        if(this.passager.étageDestination() == étageCourantPieton) {
             étageCourantPieton.supprimerPieton(this.passager);
             immeuble.ajouterCumul(this.date - this.passager.dateDépart());
             ++immeuble.nombreTotalDesPassagersSortis;

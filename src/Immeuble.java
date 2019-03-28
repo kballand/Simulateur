@@ -17,15 +17,13 @@ public class Immeuble extends Global {
     public long nombreTotalDesPassagersSortis = 0;
 
     public Etage étageLePlusBas() {
-	Etage res = tableauDesEtages[0];
-        assert res != null;
-        return res ;
+        assert tableauDesEtages[0] != null;
+        return tableauDesEtages[0];
     }
 
     public Etage étageLePlusHaut() {
-	Etage res = tableauDesEtages[tableauDesEtages.length - 1];
-        assert res != null;
-        return res;
+        assert tableauDesEtages[tableauDesEtages.length - 1] != null;
+        return tableauDesEtages[tableauDesEtages.length - 1];
     }
 
     public Etage niveauDuSol() {
@@ -35,22 +33,21 @@ public class Immeuble extends Global {
     }
 
     public Immeuble(Echeancier echeancier) {
-	Etage e = null;
+	    Etage e;
         tableauDesEtages = new Etage[9];
         int n = -1;
-        for (int i = 0; i < tableauDesEtages.length; i++) {
+        for (int i = 0; i < tableauDesEtages.length; ++i) {
             int fa = 41; // Pour le niveau 0 en dixieme de secondes:
             if (n != 0) {
                 fa = fa * (tableauDesEtages.length - 1);
             }
 	    e = new Etage(n, fa, this);
 	    tableauDesEtages[i] = e;
-            if (n == 0) {
+            if (n++ == 0) {
                 niveauDuSol = e;
             }
-            n++;
         }
-        for (int i = 0; i < tableauDesEtages.length; i++) {
+        for (int i = 0; i < tableauDesEtages.length; ++i) {
             Etage etage = tableauDesEtages[i];
             long date = etage.arrivéeSuivante();
             echeancier.ajouter(new EvenementArriveePassagerPalier(date, etage));
@@ -66,11 +63,12 @@ public class Immeuble extends Global {
 	System.out.print(modeParfait ? "parfait" : "infernal");
         System.out.println("):");
         int i = étageLePlusHaut().numéro();
-        while (i >= étageLePlusBas().numéro()) {
+        int min = étageLePlusBas().numéro();
+        while (i >= min) {
 	    buffer.setLength(0);
             étage(i).afficheDans(buffer);
 	    System.out.println(buffer);
-            i--;
+            --i;
         }
 	buffer.setLength(0);
         cabine.afficheDans(buffer);
@@ -86,28 +84,23 @@ public class Immeuble extends Global {
     public Etage étage(int i) {
         assert étageLePlusBas().numéro() <= i : "trop bas" + i;
         assert étageLePlusHaut().numéro() >= i : "trop haut" + i;
-        Etage res = tableauDesEtages[i - étageLePlusBas().numéro()];
-        assert res.numéro() == i;
-        return res;
+        assert tableauDesEtages[i - étageLePlusBas().numéro()].numéro() == i;
+        return tableauDesEtages[i - étageLePlusBas().numéro()];
     }
 
     public int nbEtages() {
-        int res = tableauDesEtages.length;
-        assert res == (étageLePlusHaut().numéro() - étageLePlusBas().numéro() + 1);
-        return res;
+        assert tableauDesEtages.length == (étageLePlusHaut().numéro() - étageLePlusBas().numéro() + 1);
+        return tableauDesEtages.length;
     }
 
     public void ajouterCumul(long t){
     	cumulDesTempsDeTransport+=t;
     }
 
-    public void ajouterPassagerSorti(){
-    	nombreTotalDesPassagersSortis++;
-    }
-
     public boolean passagerAuDessus(Etage e){
     	assert e != null;
-    	for (int i=e.numéro()+1 ; i <= étageLePlusHaut().numéro() ; i++) {
+    	int max = étageLePlusHaut().numéro();
+    	for (int i=e.numéro()+1 ; i <= max; ++i) {
 	    Etage et = étage(i);
 	    if(et.aDesPassagers())
 		return true;
@@ -117,7 +110,8 @@ public class Immeuble extends Global {
 
     public boolean passagerEnDessous(Etage e){
     	assert e != null;
-    	for (int i = étageLePlusBas().numéro() ; i < e.numéro() ; i++) {
+    	int num = e.numéro();
+    	for (int i = étageLePlusBas().numéro() ; i < num ; ++i) {
 	    Etage et = étage(i);
 	    if (et.aDesPassagers())
   		return true;

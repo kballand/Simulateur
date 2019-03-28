@@ -17,17 +17,15 @@ public class PressRandomNumberGenerator {
         minimalNext();
         iv = new int[33];
 
-        while (i <= 7) {
+        while (i++ <= 7) {
             minimalNext();
-            i++;
         }
 
         i = 32;
 
         while (i > 0) {
-            iv[i] = germe;
+            iv[i--] = germe;
             minimalNext();
-            i--;
         }
 
         iy = iv[1];

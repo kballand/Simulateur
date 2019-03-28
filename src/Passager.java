@@ -17,8 +17,7 @@ public class Passager {
         int nbEtages = immeuble.nbEtages();
         étageDépart = etageDeDepart;
         dateDépart = dateDeDepart;
-        compteurGlobalDeCreationDesPassagers++;
-        numéroDeCréation = compteurGlobalDeCreationDesPassagers;
+        numéroDeCréation = ++compteurGlobalDeCreationDesPassagers;
         if (étageDépart == niveauDuSol) {
             étageDestination = niveauDuSol;
             while (étageDestination == niveauDuSol) {

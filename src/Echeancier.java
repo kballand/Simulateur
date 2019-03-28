@@ -32,24 +32,23 @@ public class Echeancier extends Global {
     }
 
     public Evenement retourneEtEnlevePremier() {
-        Evenement e = listeEvenements.getFirst();
-        listeEvenements.removeFirst();
-        return e;
+        return listeEvenements.pollFirst();
     }
 
     public void affiche(StringBuilder buffer, Immeuble ascenseur) {
         buffer.setLength(0);
         buffer.append("Echéancier = ");
         int index = 0;
-        while (index < listeEvenements.size()) {
+        int taille = listeEvenements.size();
+        while (index < taille) {
             listeEvenements.get(index).affiche(buffer, ascenseur);
             ++index;
             if (buffer.length() > 180) {
-                index = listeEvenements.size();
+                index = taille;
                 buffer.append(", ... (");
                 buffer.append(index);
                 buffer.append(")");
-            } else if (index < listeEvenements.size()) {
+            } else if (index < taille) {
                 buffer.append(',');
             }
         }
@@ -74,9 +73,9 @@ public class Echeancier extends Global {
 
     public void enleverEvenementPietonArrivePalier(Passager p){
         for(Evenement e : listeEvenements){
-            if(e instanceof EvenementPietonArrivePalier && ((EvenementPietonArrivePalier)e).getPassager().equals(p)){
+            if(e instanceof EvenementPietonArrivePalier && ((EvenementPietonArrivePalier)e).getPassager() == p){
                 listeEvenements.remove(e);
-                break;
+                return;
             }
         }
     }

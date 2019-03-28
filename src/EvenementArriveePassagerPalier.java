@@ -25,19 +25,13 @@ public class EvenementArriveePassagerPalier extends Evenement {
         assert (!immeuble.étageLePlusBas().equals(étage) || p.sens() == '^')
                 && (!immeuble.étageLePlusHaut().equals(étage) || p.sens() == 'v');
 
-        boolean monte = false;
-        if(immeuble.cabine.étage.equals(étage)) {
-            if(immeuble.cabine.porteOuverte) {
-                if(étage.faireMonterPassager(p)) {
-                    echeancier.decalerFPC();
-                    monte = true;
-                }
-            }
-        }
         long dateActuelle = this.date;
         this.date += étage.arrivéeSuivante();
         echeancier.ajouter(this);
-        if(!monte) {
+
+        if(immeuble.cabine.étage.equals(étage) && immeuble.cabine.porteOuverte && étage.faireMonterPassager(p)) {
+            echeancier.decalerFPC();
+        } else {
             étage.ajouter(p);
             echeancier.ajouter(new EvenementPietonArrivePalier(dateActuelle + Global.délaiDePatienceAvantSportif, p));
         }

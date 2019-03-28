@@ -57,8 +57,7 @@ public class Etage extends Global {
         }
         int i = 0;
         while (((buffer.length() < 50) && (i < passagers.size()))) {
-            passagers.get(i).afficheDans(buffer);
-            i++;
+            passagers.get(i++).afficheDans(buffer);
             buffer.append(' ');
         }
         if (i < passagers.size()) {
@@ -72,8 +71,7 @@ public class Etage extends Global {
         buffer.append("| ");
         i = 0;
         while (((buffer.length() < 130) && (i < pietons.size()))) {
-            pietons.get(i).afficheDans(buffer);
-            i++;
+            pietons.get(i++).afficheDans(buffer);
             buffer.append(' ');
         }
         if (i < pietons.size()) {
@@ -138,7 +136,7 @@ public class Etage extends Global {
         assert immeuble.cabine.étage == this;
         int nbSorties = 0;
         int taille = this.passagers.size();
-        for(int i = 0; i < taille; i++) {
+        for(int i = 0; i < taille; ++i) {
             int numero = i - nbSorties;
             Passager p = this.passagers.get(numero);
             if(immeuble.cabine.faireMonterPassager(p)) {

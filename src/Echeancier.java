@@ -9,7 +9,7 @@ public class Echeancier extends Global {
      */
 
     public Echeancier() {
-        listeEvenements = new LinkedList<Evenement>();
+        listeEvenements = new LinkedList<>();
     }
 
     public boolean estVide() {
@@ -23,7 +23,7 @@ public class Echeancier extends Global {
                 listeEvenements.add(pos, e);
                 return;
             } else {
-                pos++;
+                ++pos;
             }
         }
         listeEvenements.add(pos, e);
@@ -41,7 +41,7 @@ public class Echeancier extends Global {
         int index = 0;
         while (index < listeEvenements.size()) {
             listeEvenements.get(index).affiche(buffer, ascenseur);
-            index++;
+            ++index;
             if (buffer.length() > 180) {
                 index = listeEvenements.size();
                 buffer.append(", ... (");
@@ -65,7 +65,7 @@ public class Echeancier extends Global {
                 ajouter(eventFPC);
                 return;
             }
-            index++;
+            ++index;
         }
     }
 

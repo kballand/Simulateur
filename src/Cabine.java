@@ -43,7 +43,7 @@ public class Cabine extends Global {
     */
     public boolean transporte(Passager p) {
         assert p != null;
-        for (int i = tableauPassager.length - 1; i >= 0; i--) {
+        for (int i = tableauPassager.length - 1; i >= 0; --i) {
             if (tableauPassager[i] == p) {
                 return true;
             }
@@ -64,7 +64,7 @@ public class Cabine extends Global {
                 return false;
             }
         }
-        for (int i = 0; i < tableauPassager.length; i++) {
+        for (int i = 0; i < tableauPassager.length; ++i) {
             if (tableauPassager[i] == null) {
                 tableauPassager[i] = p;
                 return true;
@@ -81,12 +81,12 @@ public class Cabine extends Global {
                 assert transporte(tableauPassager[i]);
                 if (tableauPassager[i].étageDestination() == étage) {
                     immeuble.ajouterCumul(d - tableauPassager[i].dateDépart());
-                    immeuble.nombreTotalDesPassagersSortis++;
+                    ++immeuble.nombreTotalDesPassagersSortis;
                     tableauPassager[i] = null;
-                    c++;
+                    ++c;
                 }
             }
-            i--;
+            --i;
         }
         return c;
     }
@@ -100,7 +100,7 @@ public class Cabine extends Global {
                     return true;
                 }
             }
-            i--;
+            --i;
         }
         return false;
     }
@@ -139,6 +139,7 @@ public class Cabine extends Global {
                 } else {
                     this.intention = '^';
                 }
+                return;
             }
         }
         if (this.étage == immeuble.étageLePlusHaut()) {
@@ -170,7 +171,7 @@ public class Cabine extends Global {
             if (tableauPassager[i] != null) {
                 return false;
             }
-            i++;
+            ++i;
         }
         return true;
     }

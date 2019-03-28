@@ -1,11 +1,12 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 /* Vous pouvez modifier cette classe comme vous voulez.
  */
 
 public class Echeancier extends Global {
 
-    private List<Evenement> listeEvenements;
+    private ArrayList<Evenement> listeEvenements;
     /* Comme toute les collections, il ne faut pas l'exporter.
      */
 

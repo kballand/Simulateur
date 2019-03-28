@@ -1,15 +1,16 @@
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 /* Vous pouvez modifier cette classe comme vous voulez.
  */
 
 public class Echeancier extends Global {
 
-    private LinkedList<Evenement> listeEvenements;
+    private List<Evenement> listeEvenements;
     /* Comme toute les collections, il ne faut pas l'exporter.
      */
 
     public Echeancier() {
-        listeEvenements = new LinkedList<>();
+        listeEvenements = new ArrayList<>(100);
     }
 
     public boolean estVide() {
@@ -30,8 +31,8 @@ public class Echeancier extends Global {
     }
 
     public Evenement retourneEtEnlevePremier() {
-        Evenement e = listeEvenements.getFirst();
-        listeEvenements.removeFirst();
+        Evenement e = listeEvenements.get(0);
+        listeEvenements.remove(0);
         return e;
     }
 
